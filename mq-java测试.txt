@@ -1,3 +1,4 @@
+```Java
 package mq;
 import java.io.IOException;
 import com.ibm.mq.MQC;
@@ -10,65 +11,65 @@ import com.ibm.mq.MQQueue;
 import com.ibm.mq.MQQueueManager;
 
 public class MessageByMQ{
-     //¶¨Òå¶ÓÁĞ¹ÜÀíÆ÷ºÍ¶ÓÁĞµÄÃû³Æ
+     //å®šä¹‰é˜Ÿåˆ—ç®¡ç†å™¨å’Œé˜Ÿåˆ—çš„åç§°
      private static String qmName; 
      private static String qName;
      private static MQQueueManager qMgr;
      static{
-    	 //ÉèÖÃ»·¾³:
-    	 //MQEnvironmentÖĞ°üº¬¿ØÖÆMQQueueManager¶ÔÏóÖĞµÄ»·¾³µÄ¹¹³ÉµÄ¾²Ì¬±äÁ¿£¬MQEnvironmentµÄÖµµÄÉè¶¨»áÔÚMQQueueManagerµÄ¹¹Ôìº¯Êı¼ÓÔØµÄÊ±ºòÆğ×÷ÓÃ£¬
-    	 //Òò´Ë±ØĞëÔÚ½¨Á¢MQQueueManager¶ÔÏóÖ®Ç°Éè¶¨MQEnvironmentÖĞµÄÖµ.
-    	 MQEnvironment.hostname="192.168.0.151";         	//MQ·şÎñÆ÷µÄIPµØÖ·      
-    	 MQEnvironment.channel="C1";  			//·şÎñÆ÷Á¬½ÓµÄÍ¨µÀ
-    	 MQEnvironment.CCSID=1208;              		//·şÎñÆ÷MQ·şÎñÊ¹ÓÃµÄ±àÂë1381´ú±íGBK¡¢1208´ú±íUTF(Coded Character Set Identifier:CCSID)
-    	 MQEnvironment.port=1501;						//MQ¶Ë¿Ú
-    	 qmName = "QM1";							//MQµÄ¶ÓÁĞ¹ÜÀíÆ÷Ãû³Æ
-         qName = "QR";								//MQÔ¶³Ì¶ÓÁĞµÄÃû³Æ
+    	 //è®¾ç½®ç¯å¢ƒ:
+    	 //MQEnvironmentä¸­åŒ…å«æ§åˆ¶MQQueueManagerå¯¹è±¡ä¸­çš„ç¯å¢ƒçš„æ„æˆçš„é™æ€å˜é‡ï¼ŒMQEnvironmentçš„å€¼çš„è®¾å®šä¼šåœ¨MQQueueManagerçš„æ„é€ å‡½æ•°åŠ è½½çš„æ—¶å€™èµ·ä½œç”¨ï¼Œ
+    	 //å› æ­¤å¿…é¡»åœ¨å»ºç«‹MQQueueManagerå¯¹è±¡ä¹‹å‰è®¾å®šMQEnvironmentä¸­çš„å€¼.
+    	 MQEnvironment.hostname="192.168.0.151";         	//MQæœåŠ¡å™¨çš„IPåœ°å€      
+    	 MQEnvironment.channel="C1";  			//æœåŠ¡å™¨è¿æ¥çš„é€šé“
+    	 MQEnvironment.CCSID=1208;              		//æœåŠ¡å™¨MQæœåŠ¡ä½¿ç”¨çš„ç¼–ç 1381ä»£è¡¨GBKã€1208ä»£è¡¨UTF(Coded Character Set Identifier:CCSID)
+    	 MQEnvironment.port=1501;						//MQç«¯å£
+    	 qmName = "QM1";							//MQçš„é˜Ÿåˆ—ç®¡ç†å™¨åç§°
+         qName = "QR";								//MQè¿œç¨‹é˜Ÿåˆ—çš„åç§°
          try {
-        	 //¶¨Òå²¢³õÊ¼»¯¶ÓÁĞ¹ÜÀíÆ÷¶ÔÏó²¢Á¬½Ó 
-	    	 //MQQueueManager¿ÉÒÔ±»¶àÏß³Ì¹²Ïí£¬µ«ÊÇ´ÓMQ»ñÈ¡ĞÅÏ¢µÄÊ±ºòÊÇÍ¬²½µÄ£¬ÈÎºÎÊ±ºòÖ»ÓĞÒ»¸öÏß³Ì¿ÉÒÔºÍMQÍ¨ĞÅ¡£
+        	 //å®šä¹‰å¹¶åˆå§‹åŒ–é˜Ÿåˆ—ç®¡ç†å™¨å¯¹è±¡å¹¶è¿æ¥ 
+	    	 //MQQueueManagerå¯ä»¥è¢«å¤šçº¿ç¨‹å…±äº«ï¼Œä½†æ˜¯ä»MQè·å–ä¿¡æ¯çš„æ—¶å€™æ˜¯åŒæ­¥çš„ï¼Œä»»ä½•æ—¶å€™åªæœ‰ä¸€ä¸ªçº¿ç¨‹å¯ä»¥å’ŒMQé€šä¿¡ã€‚
 			qMgr = new MQQueueManager(qmName);
 		} catch (MQException e) {
 			// TODO Auto-generated catch block
-			System.out.println("³õÊ¹»¯MQ³ö´í");
+			System.out.println("åˆä½¿åŒ–MQå‡ºé”™");
 			e.printStackTrace();
 		} 
      }
      /**
-      * ÍùMQ·¢ËÍÏûÏ¢
+      * å¾€MQå‘é€æ¶ˆæ¯
       * @param message
       * @return
       */
      public static int sendMessage(String message){
     	 int result=0;
     	 try{	
-    		 //ÉèÖÃ½«ÒªÁ¬½ÓµÄ¶ÓÁĞÊôĞÔ
+    		 //è®¾ç½®å°†è¦è¿æ¥çš„é˜Ÿåˆ—å±æ€§
     	     // Note. The MQC interface defines all the constants used by the WebSphere MQ Java programming interface 
     	     //(except for completion code constants and error code constants).
     	     //MQOO_INPUT_AS_Q_DEF:Open the queue to get messages using the queue-defined default.
     	     //MQOO_OUTPUT:Open the queue to put messages.
-    		 /*Ä¿±êÎªÔ¶³Ì¶ÓÁĞ£¬ËùÓĞÕâÀï²»¿ÉÒÔÓÃMQOO_INPUT_AS_Q_DEFÊôĞÔ*/
+    		 /*ç›®æ ‡ä¸ºè¿œç¨‹é˜Ÿåˆ—ï¼Œæ‰€æœ‰è¿™é‡Œä¸å¯ä»¥ç”¨MQOO_INPUT_AS_Q_DEFå±æ€§*/
     		 //int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_OUTPUT;
-    		 /*ÒÔÏÂÑ¡Ïî¿ÉÊÊºÏÔ¶³Ì¶ÓÁĞÓë±¾µØ¶ÓÁĞ*/
+    		 /*ä»¥ä¸‹é€‰é¡¹å¯é€‚åˆè¿œç¨‹é˜Ÿåˆ—ä¸æœ¬åœ°é˜Ÿåˆ—*/
     		 int openOptions = MQC.MQOO_OUTPUT | MQC.MQOO_FAIL_IF_QUIESCING;
-	         //Á¬½Ó¶ÓÁĞ 
+	         //è¿æ¥é˜Ÿåˆ— 
 	         //MQQueue provides inquire, set, put and get operations for WebSphere MQ queues. 
 	         //The inquire and set capabilities are inherited from MQManagedObject. 
-    		 /*¹Ø±ÕÁË¾ÍÖØĞÂ´ò¿ª*/
+    		 /*å…³é—­äº†å°±é‡æ–°æ‰“å¼€*/
  			if(qMgr==null || !qMgr.isConnected()){
  				qMgr = new MQQueueManager(qmName);
  			}
 	         MQQueue queue = qMgr.accessQueue(qName, openOptions); 	        
-	         //¶¨ÒåÒ»¸ö¼òµ¥µÄÏûÏ¢
+	         //å®šä¹‰ä¸€ä¸ªç®€å•çš„æ¶ˆæ¯
 	         MQMessage putMessage = new MQMessage(); 
-	         //½«Êı¾İ·ÅÈëÏûÏ¢»º³åÇø
+	         //å°†æ•°æ®æ”¾å…¥æ¶ˆæ¯ç¼“å†²åŒº
 	         putMessage.writeUTF(message);	
-	         //ÉèÖÃĞ´ÈëÏûÏ¢µÄÊôĞÔ£¨Ä¬ÈÏÊôĞÔ£©
+	         //è®¾ç½®å†™å…¥æ¶ˆæ¯çš„å±æ€§ï¼ˆé»˜è®¤å±æ€§ï¼‰
 	         //MQMessage message = new MQMessage();
 	         //message.format = "MQSTR";
-	         putMessage.format = "MQSTR";		//ÉèÖÃÏûÏ¢¸ñÊ½zl01
+	         putMessage.format = "MQSTR";		//è®¾ç½®æ¶ˆæ¯æ ¼å¼zl01
 	         MQPutMessageOptions pmo = new MQPutMessageOptions();	        
-	         //½«ÏûÏ¢Ğ´Èë¶ÓÁĞ 
+	         //å°†æ¶ˆæ¯å†™å…¥é˜Ÿåˆ— 
 	         queue.put(putMessage,pmo); 
 	         queue.close();
     	 }catch (MQException ex) { 
@@ -89,33 +90,33 @@ public class MessageByMQ{
     	 return result;
      }
      /**
-      * ´Ó¶ÓÁĞÖĞÈ¥»ñÈ¡ÏûÏ¢£¬Èç¹û¶ÓÁĞÖĞÃ»ÓĞÏûÏ¢£¬¾Í»á·¢ÉúÒì³££¬²»¹ıÃ»ÓĞ¹ØÏµ£¬ÓĞTRY...CATCH£¬Èç¹ûÊÇµÚÈı·½³ÌĞòµ÷ÓÃ·½·¨£¬Èç¹ûÎŞ·µ»ØÔòËµÃ÷ÎŞÏûÏ¢
-      * µÚÈı·½¿ÉÒÔ½«¸Ã·½·¨·ÅÓÚÒ»¸öÎŞÏŞÑ­»·µÄwhile(true){...}Ö®ÖĞ£¬²»ĞèÒªÉèÖÃµÈ´ı£¬ÒòÎªÔÚ¸Ã·½·¨ÄÚ²¿ÔÚÃ»ÓĞÏûÏ¢µÄÊ±ºò»á×Ô¶¯µÈ´ı¡£
+      * ä»é˜Ÿåˆ—ä¸­å»è·å–æ¶ˆæ¯ï¼Œå¦‚æœé˜Ÿåˆ—ä¸­æ²¡æœ‰æ¶ˆæ¯ï¼Œå°±ä¼šå‘ç”Ÿå¼‚å¸¸ï¼Œä¸è¿‡æ²¡æœ‰å…³ç³»ï¼Œæœ‰TRY...CATCHï¼Œå¦‚æœæ˜¯ç¬¬ä¸‰æ–¹ç¨‹åºè°ƒç”¨æ–¹æ³•ï¼Œå¦‚æœæ— è¿”å›åˆ™è¯´æ˜æ— æ¶ˆæ¯
+      * ç¬¬ä¸‰æ–¹å¯ä»¥å°†è¯¥æ–¹æ³•æ”¾äºä¸€ä¸ªæ— é™å¾ªç¯çš„while(true){...}ä¹‹ä¸­ï¼Œä¸éœ€è¦è®¾ç½®ç­‰å¾…ï¼Œå› ä¸ºåœ¨è¯¥æ–¹æ³•å†…éƒ¨åœ¨æ²¡æœ‰æ¶ˆæ¯çš„æ—¶å€™ä¼šè‡ªåŠ¨ç­‰å¾…ã€‚
       * @return
       */
      public static String getMessage(){
     	 String message=null;
     	 try{    		 
-    		 //ÉèÖÃ½«ÒªÁ¬½ÓµÄ¶ÓÁĞÊôĞÔ
+    		 //è®¾ç½®å°†è¦è¿æ¥çš„é˜Ÿåˆ—å±æ€§
     	     // Note. The MQC interface defines all the constants used by the WebSphere MQ Java programming interface 
     	     //(except for completion code constants and error code constants).
     	     //MQOO_INPUT_AS_Q_DEF:Open the queue to get messages using the queue-defined default.
     	     //MQOO_OUTPUT:Open the queue to put messages.
     		 int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_OUTPUT;
 	    	 MQMessage retrieve = new MQMessage();
-	    	 //ÉèÖÃÈ¡³öÏûÏ¢µÄÊôĞÔ£¨Ä¬ÈÏÊôĞÔ£©
-	    	 //Set the put message options.£¨ÉèÖÃ·ÅÖÃÏûÏ¢Ñ¡Ïî£© 
+	    	 //è®¾ç½®å–å‡ºæ¶ˆæ¯çš„å±æ€§ï¼ˆé»˜è®¤å±æ€§ï¼‰
+	    	 //Set the put message options.ï¼ˆè®¾ç½®æ”¾ç½®æ¶ˆæ¯é€‰é¡¹ï¼‰ 
     		 //MQGetMessageOptions gmo = new MQGetMessageOptions(); 
-    		 gmo.options = gmo.options + MQC.MQGMO_SYNCPOINT;//Get messages under sync point control£¨ÔÚÍ¬²½µã¿ØÖÆÏÂ»ñÈ¡ÏûÏ¢£© 
-    		 gmo.options = gmo.options + MQC.MQGMO_WAIT;  // Wait if no messages on the Queue£¨Èç¹ûÔÚ¶ÓÁĞÉÏÃ»ÓĞÏûÏ¢ÔòµÈ´ı£© 
-    		 gmo.options = gmo.options + MQC.MQGMO_FAIL_IF_QUIESCING;// Fail if Qeue Manager Quiescing£¨Èç¹û¶ÓÁĞ¹ÜÀíÆ÷Í£¶ÙÔòÊ§°Ü£© 
-    		 gmo.waitInterval = 1000 ;  // Sets the time limit for the wait.£¨ÉèÖÃµÈ´ıµÄºÁÃëÊ±¼äÏŞÖÆ£© 
-    		 /*¹Ø±ÕÁË¾ÍÖØĞÂ´ò¿ª*/
+    		 gmo.options = gmo.options + MQC.MQGMO_SYNCPOINT;//Get messages under sync point controlï¼ˆåœ¨åŒæ­¥ç‚¹æ§åˆ¶ä¸‹è·å–æ¶ˆæ¯ï¼‰ 
+    		 gmo.options = gmo.options + MQC.MQGMO_WAIT;  // Wait if no messages on the Queueï¼ˆå¦‚æœåœ¨é˜Ÿåˆ—ä¸Šæ²¡æœ‰æ¶ˆæ¯åˆ™ç­‰å¾…ï¼‰ 
+    		 gmo.options = gmo.options + MQC.MQGMO_FAIL_IF_QUIESCING;// Fail if Qeue Manager Quiescingï¼ˆå¦‚æœé˜Ÿåˆ—ç®¡ç†å™¨åœé¡¿åˆ™å¤±è´¥ï¼‰ 
+    		 gmo.waitInterval = 1000 ;  // Sets the time limit for the wait.ï¼ˆè®¾ç½®ç­‰å¾…çš„æ¯«ç§’æ—¶é—´é™åˆ¶ï¼‰ 
+    		 /*å…³é—­äº†å°±é‡æ–°æ‰“å¼€*/
  			if(qMgr==null || !qMgr.isConnected()){
  				qMgr = new MQQueueManager(qmName);
  			}
 	         MQQueue queue = qMgr.accessQueue(qName, openOptions); 
-	         // ´Ó¶ÓÁĞÖĞÈ¡³öÏûÏ¢
+	         // ä»é˜Ÿåˆ—ä¸­å–å‡ºæ¶ˆæ¯
 	         queue.get(retrieve, gmo);
 	         message = retrieve.readUTF();	
 	         System.out.println("The message is: " + message); 
@@ -137,8 +138,9 @@ public class MessageByMQ{
     	 return message;
      }
      public static void main(String args[]) {
-    	 /*ÏÂÃæÁ½¸ö·½·¨¿ÉÍ¬Ê±Ê¹ÓÃ£¬Ò²¿ÉÒÔµ¥¶ÀÊ¹ÓÃ*/
+    	 /*ä¸‹é¢ä¸¤ä¸ªæ–¹æ³•å¯åŒæ—¶ä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥å•ç‹¬ä½¿ç”¨*/
     	 sendMessage("Hello 123");
     	 //getMessage();
      }
 }
+```
