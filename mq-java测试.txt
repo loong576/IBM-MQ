@@ -136,4 +136,9 @@ public class MessageByMQ{
          }
     	 return message;
      }
-     publ
+     public static void main(String args[]) {
+    	 /*下面两个方法可同时使用，也可以单独使用*/
+    	 sendMessage("Hello 123");
+    	 //getMessage();
+     }
+}

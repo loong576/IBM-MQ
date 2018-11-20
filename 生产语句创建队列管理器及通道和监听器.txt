@@ -279,4 +279,12 @@ DEFINE CHANNEL ('VACT.TO.BMS') CHLTYPE(RCVR) +
        SENDDATA(' ') +
        SENDEXIT(' ') +
        SEQWRAP(999999999) +
-    
+       SSLCAUTH(REQUIRED) +
+       SSLCIPH(' ') +
+       SSLPEER(' ') +
+       KAINT(AUTO) +
+       MONCHL(QMGR) +
+       STATCHL(QMGR) +
+       COMPMSG(NONE) +
+       COMPHDR(NONE) +
+       REPLACE
