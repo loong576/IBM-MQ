@@ -1,4 +1,3 @@
-```Java
 package mq;
 import java.io.IOException;
 import com.ibm.mq.MQC;
@@ -143,4 +142,3 @@ public class MessageByMQ{
     	 //getMessage();
      }
 }
-```
